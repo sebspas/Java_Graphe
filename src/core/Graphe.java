@@ -6,6 +6,8 @@ package core ;
  */
 
 import java.io.* ;
+import java.util.ArrayList;
+
 import base.* ;
 
 public class Graphe {
@@ -135,11 +137,6 @@ public class Graphe {
 					edges++ ;
 
 					Couleur.set(dessin, descripteurs[descr_num].getType()) ;
-
-					// on ajoute le successeur a la liste des arcs existant poour dce sommet
-					tabNoeud[num_node].addArc(
-							new Arc(tabNoeud[dest_node], 
-									descripteurs[descr_num]));
 					
 					float current_long = tabNoeud[num_node].getLongitude() ;
 					float current_lat  = tabNoeud[num_node].getLatitude() ;
@@ -157,6 +154,23 @@ public class Graphe {
 					// On le dessine si le noeud destination est dans la zone du graphe courant.
 					if (succ_zone == numzone) {
 						dessin.drawLine(current_long, current_lat, tabNoeud[dest_node].getLongitude(), tabNoeud[dest_node].getLatitude()) ;
+
+						// on ajoute le successeur a la liste des arcs existant pour dce sommet
+						// UNIQUEMENT SI DANS LA MEME ZONE
+
+						tabNoeud[num_node].addArc(
+								new Arc(tabNoeud[dest_node],
+										descripteurs[descr_num],
+                                        longueur));
+
+                        // si double sens on ajoute un autre arc
+                        if (!descripteurs[descr_num].isSensUnique()) {
+                            // ajout arc double sens
+                            tabNoeud[dest_node].addArc(
+                                    new Arc(tabNoeud[num_node],
+                                            descripteurs[descr_num],
+                                            longueur));
+                        }
 					}
 				}
 			}
@@ -257,6 +271,7 @@ public class Graphe {
 
 			int nb_noeuds = dis.readInt () ;
 
+
 			// Origine du chemin
 			int first_zone = dis.readUnsignedByte() ;
 			int first_node = Utils.read24bits(dis) ;
@@ -267,6 +282,9 @@ public class Graphe {
 
 			System.out.println("Chemin de " + first_zone + ":" + first_node + " vers " + last_zone + ":" + last_node) ;
 
+            // tableau des noeud du chemin
+            ArrayList<Noeud> tmpNoeudChemin = new ArrayList<Noeud>();
+
 			int current_zone = 0 ;
 			int current_node = 0 ;
 
@@ -275,12 +293,22 @@ public class Graphe {
 				current_zone = dis.readUnsignedByte() ;
 				current_node = Utils.read24bits(dis) ;
 				System.out.println(" --> " + current_zone + ":" + current_node) ;
+                // ajout du noeud dans la liste
+                tmpNoeudChemin.add(tabNoeud[current_node]);
 			}
 
 			if ((current_zone != last_zone) || (current_node != last_node)) {
 				System.out.println("Le chemin " + nom_chemin + " ne termine pas sur le bon noeud.") ;
 				System.exit(1) ;
 			}
+
+            // on crée le chemin correspondant
+            Chemin chemin = new Chemin(tmpNoeudChemin);
+
+            chemin.dessinerChemin(this.getDessin());
+
+            System.out.println("Distance min total du chemin : " + chemin.distanceTot());
+            System.out.println("Temps min total du chemin : " + chemin.tempsTotal());
 
 		} catch (IOException e) {
 			e.printStackTrace() ;

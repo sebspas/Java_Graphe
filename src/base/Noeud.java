@@ -28,8 +28,12 @@ public class Noeud {
     	tabArc.add(a);
     	
     }
-  
-    public int getNbSuccesseurs() {
+
+	public ArrayList<Arc> getTabArc() {
+		return tabArc;
+	}
+
+	public int getNbSuccesseurs() {
     	return tabArc.size();
     }
     

@@ -23,6 +23,9 @@ public class Couleur {
 	    break ;
 
 	case 'b':
+        d.setWidth(1) ;
+        d.setColor(Color.cyan) ;
+        break ;
 	case 'c':
 	case 'd':
 	case 'e':
