@@ -24,15 +24,31 @@ public class BinaryHeap<E extends Comparable<E>> {
     // We have to use an ArrayList
     private ArrayList<E> array; // The heap array
 
-    // on a aussi besoin d'associer à chaque sommet un cout, (et plus tard un label...)
-    private HashMap<Integer , E> cout; // chaque index donne un cout
+    // on a pour chaque indice le numero du sommet qui correspond dans
+    private HashMap<E, Integer> tableCorrespondance; // key -> indice dans le tab
 
+    /*
+    *  Maj du tableau des correspondance
+     */
+    private void majTabCorresp() {
+        for (int i = 0; i < array.size(); i++) {
+            this.tableCorrespondance.put(array.get(i), i);
+        }
+    }
+
+    public void update(E element) {
+        this.percolateDown(0); // on refait un tri
+    }
     /**
      * Construct the binary heap.
      */
     public BinaryHeap() {
         this.currentSize = 0;
         this.array = new ArrayList<E>();
+
+        // on init la HashMap
+        this.tableCorrespondance = new HashMap<>();
+
     }
 
     // Constructor used for debug.
@@ -48,6 +64,7 @@ public class BinaryHeap<E extends Comparable<E>> {
         } else {
             this.array.set(index, value);
         }
+        this.tableCorrespondance.put(value, index);
     }
 
     /**
@@ -92,6 +109,7 @@ public class BinaryHeap<E extends Comparable<E>> {
         int index = this.currentSize++;
         this.arraySet(index, x);
         this.percolateUp(index);
+        this.majTabCorresp();
     }
 
     /**
@@ -208,7 +226,7 @@ public class BinaryHeap<E extends Comparable<E>> {
 
 
     // Test program : compare with the reference implementation PriorityQueue.
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         BinaryHeap<Integer> heap = new BinaryHeap<Integer>();
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
 
@@ -258,5 +276,5 @@ public class BinaryHeap<E extends Comparable<E>> {
                 count = 0;
             }
         }
-    }*/
+    }
 }
