@@ -7,6 +7,7 @@
 // ******************ERRORS********************************
 // Throws RuntimeException for findMin and deleteMin when empty
 package core ;
+import base.Label;
 import base.Noeud;
 
 import java.util.*;
@@ -27,20 +28,21 @@ public class BinaryHeap<E extends Comparable<E>> {
     private ArrayList<E> array; // The heap array
 
     // on a pour chaque indice le numero du sommet qui correspond dans
-    // private HashMap<E, Noeud> tableCorrespondance; // cout -> Noeud
+    private HashMap<E, Integer> tableCorrespondance; // position du label dans le array -> Label
 
     /*
     *  Maj du tableau des correspondance
      */
-   /* private void majTabCorresp() {
+    private void majTabCorresp() {
         for (int i = 0; i < array.size(); i++) {
-            this.tableCorrespondance.put(i, array.get(i));
+            this.tableCorrespondance.put(array.get(i), i);
         }
-    }*/
+    }
 
     public void update(E element) {
         // this.tableCorrespondance.get();
-        this.percolateDown(0); // on refait un tri du tableau suite a la maj d'un element
+        // on tri uniquement avant l'élement modifié
+        this.percolateUp(this.tableCorrespondance.get(element));
     }
 
     /**
@@ -51,7 +53,7 @@ public class BinaryHeap<E extends Comparable<E>> {
         this.array = new ArrayList<E>();
 
         // on init la HashMap
-       // this.tableCorrespondance = new HashMap<>();
+        this.tableCorrespondance = new HashMap<>();
     }
 
     // Constructor used for debug.
@@ -67,7 +69,7 @@ public class BinaryHeap<E extends Comparable<E>> {
         } else {
             this.array.set(index, value);
         }
-       // this.tableCorrespondance.put(index, value);
+       this.tableCorrespondance.put(value, index);
     }
 
     /**
@@ -112,7 +114,7 @@ public class BinaryHeap<E extends Comparable<E>> {
         int index = this.currentSize++;
         this.arraySet(index, x);
         this.percolateUp(index);
-       // this.majTabCorresp();
+        this.majTabCorresp();
     }
 
     /**
