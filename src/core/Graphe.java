@@ -35,6 +35,11 @@ public class Graphe {
 	// tab noeud
 	private Noeud[] tabNoeud;
 
+	// getNoeud i
+	public Noeud getNoeudGraphe(int indice) {
+		return tabNoeud[indice];
+	}
+
 	/*
 	 * Ces attributs constituent une structure ad-hoc pour stocker les informations du graphe.
 	 * Vous devez modifier et ameliorer ce choix de conception simpliste.
@@ -91,7 +96,8 @@ public class Graphe {
 			for (int num_node = 0 ; num_node < nb_nodes ; num_node++) {
 				tabNoeud[num_node] = new Noeud(
 						((float)dis.readInt ()) / 1E6f,
-						((float)dis.readInt ()) / 1E6f
+						((float)dis.readInt ()) / 1E6f,
+                        num_node
 					);
 				
 				// Lecture du noeud numero num_node
