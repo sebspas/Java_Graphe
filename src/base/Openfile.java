@@ -27,7 +27,7 @@ public class Openfile {
 	".",
 
 	// Si vous utilisez votre propre dossier pour les donnees, mettez-le ici.
-	"/home/votrepropredossier/a/vous",
+	"/home/pera/Bureau/Java_Graphe/Maps",
     } ;
 
     // Extension testees. Garder l'extension vide dans la liste.

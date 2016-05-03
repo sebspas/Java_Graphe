@@ -73,7 +73,7 @@ public class Chemin {
 
     public void dessinerChemin(Dessin dessin) {
 
-        Couleur.set(dessin, 'b') ;
+        Couleur.set(dessin, 'p') ;
 
         for (int i = 0; i < tabNoeud.size()-1  ; i++) {
             // on set le noeud courant

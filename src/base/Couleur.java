@@ -15,45 +15,47 @@ public class Couleur {
 
     public static void set(Dessin d, char type) {
 
-	// Voir le fichier Descripteur.java pour le type des routes.
-	switch (type) {
-	case 'a':
-	    d.setWidth(2) ;
-	    d.setColor(Color.red) ;
-	    break ;
+        // Voir le fichier Descripteur.java pour le type des routes.
+        switch (type) {
+            case 'a':
+                d.setWidth(2) ;
+                d.setColor(Color.red) ;
+                break ;
 
-	case 'b':
-        d.setWidth(1) ;
-        d.setColor(Color.cyan) ;
-        break ;
-	case 'c':
-	case 'd':
-	case 'e':
-	case 'f':
-	case 'g':
-	    d.setWidth(1) ;
-	    d.setColor(bigroute) ;
-	    break ;
-	case 'h':
-	case 'i':
-	case 'j':
-	case 'k':
-	case 'l':
-	case 'm':
-	case 'n':
-	case 'o':
-	    d.setWidth(1) ;
-	    d.setColor(tiroute) ;
-	    break ;
-	    
-	case 'z':
-	    d.setWidth(4) ;
-	    d.setColor(cote) ;
-	    break ;
-	    
-	default:
-	    d.setWidth(1) ;
-	    d.setColor(Color.black) ;
-	}
+            case 'b':
+                d.setWidth(1) ;
+                d.setColor(Color.cyan) ;
+                break ;
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+            case 'g':
+                d.setWidth(1) ;
+                d.setColor(bigroute) ;
+                break ;
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'n':
+            case 'o':
+                d.setWidth(1) ;
+                d.setColor(tiroute) ;
+                break ;
+            case 'p':
+                d.setWidth(3);
+                d.setColor(Color.black);
+            case 'z':
+                d.setWidth(4) ;
+                d.setColor(cote) ;
+                break ;
+
+            default:
+                d.setWidth(1) ;
+                d.setColor(Color.black) ;
+        }
     }
 }
