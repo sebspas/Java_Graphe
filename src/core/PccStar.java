@@ -1,6 +1,9 @@
 package core ;
 
 import java.io.* ;
+
+import base.Arc;
+import base.Label;
 import base.Readarg ;
 
 public class PccStar extends Pcc {
@@ -16,4 +19,7 @@ public class PccStar extends Pcc {
 	// A vous d'implementer la recherche de plus court chemin A*
     }
 
+    public int compte(Label l,Arc a ){
+    	return l.getCout()+a.getLongueur();
+    }
 }

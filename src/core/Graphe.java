@@ -17,6 +17,11 @@ public class Graphe {
 
 	// Fenetre graphique
 	private final Dessin dessin ;
+	
+	// Variables pour la sortie graphique
+	private int nb_node_aff;
+	private int descrip_aff;
+	private int arete_aff;
 
 	// Version du format MAP utilise'.
 	private static final int version_map = 4 ;
@@ -38,6 +43,10 @@ public class Graphe {
 	// getNoeud i
 	public Noeud getNoeudGraphe(int indice) {
 		return tabNoeud[indice];
+	}
+	
+	public String getNom(){
+		return this.nomCarte;
 	}
 
 	/*
@@ -185,12 +194,27 @@ public class Graphe {
 
 			System.out.println("Fichier lu : " + nb_nodes + " sommets, " + edges + " aretes, " 
 					+ nb_descripteurs + " descripteurs.") ;
+			nb_node_aff = nb_nodes;
+			arete_aff = edges;
+			descrip_aff = nb_descripteurs;
 
 		} catch (IOException e) {
 			e.printStackTrace() ;
 			System.exit(1) ;
 		}
 
+	}
+
+	public int getNb_node_aff() {
+		return nb_node_aff;
+	}
+
+	public int getDescrip_aff() {
+		return descrip_aff;
+	}
+
+	public int getArete_aff() {
+		return arete_aff;
 	}
 
 	// Rayon de la terre en metres

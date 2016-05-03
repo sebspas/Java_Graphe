@@ -33,11 +33,11 @@ public class BinaryHeap<E extends Comparable<E>> {
     /*
     *  Maj du tableau des correspondance
      */
-    private void majTabCorresp() {
-        for (int i = 0; i < array.size(); i++) {
-            this.tableCorrespondance.put(array.get(i), i);
+    /*private void majTabCorresp(int alt) {
+        for (; alt < array.size(); alt++) {
+            this.tableCorrespondance.put(array.get(alt), alt);
         }
-    }
+    }*/
 
     public void update(E element) {
         // this.tableCorrespondance.get();
@@ -114,7 +114,7 @@ public class BinaryHeap<E extends Comparable<E>> {
         int index = this.currentSize++;
         this.arraySet(index, x);
         this.percolateUp(index);
-        this.majTabCorresp();
+        //this.majTabCorresp(index);
     }
 
     /**
@@ -128,9 +128,13 @@ public class BinaryHeap<E extends Comparable<E>> {
         for (; index > 0 && x.compareTo(this.array.get(index_parent(index))) < 0; index = index_parent(index)) {
             E moving_val = this.array.get(index_parent(index));
             this.arraySet(index, moving_val);
+            // on actualise la tab des correspondance
+            this.tableCorrespondance.put(moving_val, index);
         }
 
         this.arraySet(index, x);
+        // on actualise la tab des correspondance
+        this.tableCorrespondance.put(x, index);
     }
 
     /**
